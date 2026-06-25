@@ -18,7 +18,6 @@ public class JugadorValidator : IValidator<Jugador> {
         if (!Enum.IsDefined(entity.Country)) {
             errores.Add("El pais no coincide con los disponibles");
         }
-
         if (string.IsNullOrWhiteSpace(entity.PlayerName) || entity.PlayerName.Length < 3) {
             errores.Add("La nommbre debe contener al manos 3 carazteres");
         }

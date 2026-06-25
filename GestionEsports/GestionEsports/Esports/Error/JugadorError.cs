@@ -2,7 +2,7 @@
 
 namespace GestionEsports.Esports.Error;
 
-public record JugadorError(string Message) : DomainError(Message) {
+public abstract record JugadorError(string Message) : DomainError(Message) {
     public sealed record Validation(IEnumerable<string> Errors) 
         : JugadorError($"Se han detectado errores de validación en la entidad:{Environment.NewLine}• {string.Join($"{Environment.NewLine}• ", Errors)}");
 }
