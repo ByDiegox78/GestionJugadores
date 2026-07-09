@@ -1,6 +1,7 @@
 ﻿namespace GestionEsports.Esports.Dto;
 
 public record JugadorDto(
+    string Id,
     string Team,
     string PlayerName,
     string Position, 

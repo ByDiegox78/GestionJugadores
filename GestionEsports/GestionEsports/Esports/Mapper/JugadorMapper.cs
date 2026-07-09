@@ -7,6 +7,7 @@ namespace GestionEsports.Esports.Mapper;
 public static class JugadorMapper {
     public static JugadorDto ToDto(this Jugador model) {
         return new JugadorDto(
+            model.Id.ToString(),
             model.Team.ToString(),
             model.PlayerName,
             model.Position.ToString(),
@@ -37,6 +38,7 @@ public static class JugadorMapper {
 
     public static Jugador ToModel(this JugadorDto dto) {
         return new Jugador {
+            Id = int.Parse(dto.Id),
             Team = Enum.Parse<Equipo>(dto.Team, true),
             PlayerName = dto.PlayerName,
             Position = Enum.Parse<Rol>(dto.Position, true),
