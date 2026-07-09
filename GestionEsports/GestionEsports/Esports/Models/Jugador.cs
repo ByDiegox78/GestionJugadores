@@ -1,6 +1,7 @@
 ﻿namespace GestionEsports.Esports.Models;
 
 public class Jugador {
+    public int Id { get; set; }
     public Equipo Team { get; set; }
     public string PlayerName { get; set; }
     public Rol Position { get; set; }
