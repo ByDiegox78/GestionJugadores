@@ -18,11 +18,11 @@ public class JugadorCsvStorage : IStorageJugadorCsv {
             _logger.Debug("Guardando los datos del archivo {Path}", path);
             using var writer = new StreamWriter(path, false, Encoding.UTF8);
             writer.WriteLine(
-                "Team;PlayerName;Position;Games;WinRate;KDA;AvgKills;AvgDeaths;AvgAssists;CSPerMin;GoldPerMin;KPPercent;DPM;VSPM;AvgWPM;AvgWCPM;AvgVWPM;GD15;CSD15;XPD15;FBPercent;FBVictim;PentaKills;SoloKills;Country");
+                "Id;Team;PlayerName;Position;Games;WinRate;KDA;AvgKills;AvgDeaths;AvgAssists;CSPerMin;GoldPerMin;KPPercent;DPM;VSPM;AvgWPM;AvgWCPM;AvgVWPM;GD15;CSD15;XPD15;FBPercent;FBVictim;PentaKills;SoloKills;Country");
             foreach (var jugador in items) {
                 var dto = jugador.ToDto();
                 writer.WriteLine(
-                    $"{dto.Team};{dto.PlayerName};{dto.Position};{dto.Games};{dto.WinRate};{dto.KDA};{dto.AvgKills};{dto.AvgDeaths};{dto.AvgAssists};{dto.CSPerMin};{dto.GoldPerMin};{dto.KPPercent};{dto.DPM};{dto.VSPM};{dto.AvgWPM};{dto.AvgWCPM};{dto.AvgVWPM};{dto.GD15};{dto.CSD15};{dto.XPD15};{dto.FBPercent};{dto.FBVictim};{dto.PentaKills};{dto.SoloKills};{dto.Country}");
+                    $"{dto.Id};{dto.Team};{dto.PlayerName};{dto.Position};{dto.Games};{dto.WinRate};{dto.KDA};{dto.AvgKills};{dto.AvgDeaths};{dto.AvgAssists};{dto.CSPerMin};{dto.GoldPerMin};{dto.KPPercent};{dto.DPM};{dto.VSPM};{dto.AvgWPM};{dto.AvgWCPM};{dto.AvgVWPM};{dto.GD15};{dto.CSD15};{dto.XPD15};{dto.FBPercent};{dto.FBVictim};{dto.PentaKills};{dto.SoloKills};{dto.Country}");
             }
 
             return Result.Success<bool, DomainError>(true);
@@ -43,28 +43,29 @@ public class JugadorCsvStorage : IStorageJugadorCsv {
                     p[0],
                     p[1],
                     p[2],
-                    int.Parse(p[3]),
-                    p[4],
+                    p[3],
+                    int.Parse(p[4]),
                     p[5],
                     p[6],
                     p[7],
                     p[8],
                     p[9],
-                    int.Parse(p[10]),
-                    p[11],
-                    int.Parse(p[12]),
-                    p[13],
+                    p[10],
+                    int.Parse(p[11]),
+                    p[12],
+                    int.Parse(p[13]),
                     p[14],
                     p[15],
                     p[16],
-                    int.Parse(p[17]),
+                    p[17],
                     int.Parse(p[18]),
                     int.Parse(p[19]),
-                    p[20],
+                    int.Parse(p[20]),
                     p[21],
-                    int.Parse(p[22]),
+                    p[22],
                     int.Parse(p[23]),
-                    p[24]
+                    int.Parse(p[24]),
+                    p[25]
                 ).ToModel()).ToList();
             return Result.Success<IEnumerable<Jugador>, DomainError>(jugadores);
         } catch (Exception e) {
