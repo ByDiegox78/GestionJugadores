@@ -1,6 +1,6 @@
 ﻿namespace GestionEsports.Esports.Models;
 
-public class Jugador {
+public record Jugador {
     public int Id { get; set; }
     public Equipo Team { get; set; }
     public string PlayerName { get; set; }
@@ -29,4 +29,11 @@ public class Jugador {
     public int SoloKills { get; set; }
     public Pais Country { get; set; }
     public string FlashKeybind { get; set; }
+    
+    public bool IsDeleted { get; init; }
+    
+    public DateTime CreatedAt { get; init; }
+    
+    public DateTime UpdatedAt { get; init; }
+
 }

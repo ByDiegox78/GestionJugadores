@@ -18,11 +18,11 @@ public class JugadorCsvStorage : IStorageJugadorCsv {
             _logger.Debug("Guardando los datos del archivo {Path}", path);
             using var writer = new StreamWriter(path, false, Encoding.UTF8);
             writer.WriteLine(
-                "Id;Team;PlayerName;Position;Games;WinRate;KDA;AvgKills;AvgDeaths;AvgAssists;CSPerMin;GoldPerMin;KPPercent;DPM;VSPM;AvgWPM;AvgWCPM;AvgVWPM;GD15;CSD15;XPD15;FBPercent;FBVictim;PentaKills;SoloKills;Country");
+                "Id;Team;PlayerName;Position;Games;WinRate;KDA;AvgKills;AvgDeaths;AvgAssists;CSPerMin;GoldPerMin;KPPercent;DPM;VSPM;AvgWPM;AvgWCPM;AvgVWPM;GD15;CSD15;XPD15;FBPercent;FBVictim;PentaKills;SoloKills;Country;IsDeleted;CreatedAt;UpdatedAt");
             foreach (var jugador in items) {
                 var dto = jugador.ToDto();
                 writer.WriteLine(
-                    $"{dto.Id};{dto.Team};{dto.PlayerName};{dto.Position};{dto.Games};{dto.WinRate};{dto.KDA};{dto.AvgKills};{dto.AvgDeaths};{dto.AvgAssists};{dto.CSPerMin};{dto.GoldPerMin};{dto.KPPercent};{dto.DPM};{dto.VSPM};{dto.AvgWPM};{dto.AvgWCPM};{dto.AvgVWPM};{dto.GD15};{dto.CSD15};{dto.XPD15};{dto.FBPercent};{dto.FBVictim};{dto.PentaKills};{dto.SoloKills};{dto.Country}");
+                    $"{dto.Id};{dto.Team};{dto.PlayerName};{dto.Position};{dto.Games};{dto.WinRate};{dto.KDA};{dto.AvgKills};{dto.AvgDeaths};{dto.AvgAssists};{dto.CSPerMin};{dto.GoldPerMin};{dto.KPPercent};{dto.DPM};{dto.VSPM};{dto.AvgWPM};{dto.AvgWCPM};{dto.AvgVWPM};{dto.GD15};{dto.CSD15};{dto.XPD15};{dto.FBPercent};{dto.FBVictim};{dto.PentaKills};{dto.SoloKills};{dto.Country};{dto.IsDeleted};{dto.CreatedAt};{dto.UpdatedAt}");
             }
 
             return Result.Success<bool, DomainError>(true);
@@ -65,7 +65,10 @@ public class JugadorCsvStorage : IStorageJugadorCsv {
                     p[22],
                     int.Parse(p[23]),
                     int.Parse(p[24]),
-                    p[25]
+                    p[25],
+                    bool.Parse(p[26]),
+                    p[27],
+                    p[28]
                 ).ToModel()).ToList();
             return Result.Success<IEnumerable<Jugador>, DomainError>(jugadores);
         } catch (Exception e) {

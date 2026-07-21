@@ -26,5 +26,8 @@ public record JugadorDto(
     string FBVictim,
     int PentaKills,
     int SoloKills,
-    string Country
+    string Country,
+    bool IsDeleted,
+    string CreatedAt,
+    string UpdatedAt
 );
