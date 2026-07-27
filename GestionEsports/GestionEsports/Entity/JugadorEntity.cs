@@ -1,11 +1,30 @@
-﻿namespace GestionEsports.Esports.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using GestionEsports.Esports.Models;
 
-public record Jugador {
+namespace GestionEsports.Entity;
+
+
+[Table("Jugadores")]
+public class JugadorEntity {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+
+    [Required]
+    [Column(TypeName = "TEXT")]
     public Equipo Team { get; set; }
+
+    [Required]
+    [MaxLength(100)]
     public string PlayerName { get; set; }
+
+    [Required]
+    [Column(TypeName = "TEXT")]
     public Rol Position { get; set; }
+
     public int Games { get; set; }
+
     public double WinRate { get; set; }
     public double KDA { get; set; }
     public double AvgKills { get; set; }
@@ -27,13 +46,18 @@ public record Jugador {
     public double FBVictim { get; set; }
     public int PentaKills { get; set; }
     public int SoloKills { get; set; }
-    public Pais Country { get; set; }
-    public string FlashKeybind { get; set; }
-    
-    public bool IsDeleted { get; init; }
-    
-    public DateTime CreatedAt { get; init; }
-    
-    public DateTime UpdatedAt { get; init; }
 
+    [Required]
+    [Column(TypeName = "TEXT")]
+    public Pais Country { get; set; }
+
+    [Required]
+    [MaxLength(1)]
+    public string FlashKeybind { get; set; }
+
+    public bool IsDeleted { get; set; }
+
+    public DateTime CreatedAt { get; set; }
+
+    public DateTime UpdatedAt { get; set; }
 }
