@@ -12,6 +12,13 @@ public abstract record JugadorError(string Message) : DomainError(Message) {
         : JugadorError($"Error de Base de datos: {Details}");
     public sealed record NotFound(int Id)
         : JugadorError($"No se encontró: El jugador con el ID {Id} no existe en el sistema");
+    public sealed record NotFoundByName(string Name)
+        : JugadorError($"No se encontró: El jugador con el NOMBRE {Name} no existe en el sistema");
+    public sealed record NotFoundByRol(string Rol)
+        : JugadorError($"No se encontraron jugadores para el rol: {Rol}");
+
+    public sealed record NotFoundByTeam(string Team)
+        : JugadorError($"No se encontraron jugadores para el equipo: {Team}");
 }
 
 public static class JugadorErrors {
@@ -26,5 +33,16 @@ public static class JugadorErrors {
     }
     public static DomainError NotFound(int id) {
         return new JugadorError.NotFound(id);
+    }
+    public static DomainError NotFoundByName(string name) {
+        return new JugadorError.NotFoundByName(name);
+    }
+
+    public static DomainError NotFoundByRol(string rol) {
+        return new JugadorError.NotFoundByRol(rol);
+    }
+
+    public static DomainError NotFoundByTeam(string team) {
+        return new JugadorError.NotFoundByTeam(team);
     }
 }

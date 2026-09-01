@@ -15,5 +15,10 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.9" />
         <PackageReference Include="Serilog" Version="4.3.1" />
     </ItemGroup>
+    <ItemGroup>
+        <None Update="appsetings.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 
 </Project>

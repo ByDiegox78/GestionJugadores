@@ -51,7 +51,8 @@ public class JugadorRepository: IJugadorRepository {
     }
 
     public Result<Jugador, DomainError> Create(Jugador jugador) {
-        if (ExisteJugador(jugador.PlayerName)) 
+        var existe = ExisteJugador(jugador.PlayerName);
+        if (existe.IsSuccess && existe.Value)
             return Result.Failure<Jugador, DomainError>(JugadorErrors.NameAlreadyEists(jugador.PlayerName));
         jugador = jugador with {
             Id = 0,
@@ -197,12 +198,13 @@ public class JugadorRepository: IJugadorRepository {
         
     }
 
-    public bool ExisteJugador(string jugador) {
+    public Result<bool, DomainError> ExisteJugador(string jugador) {
         try {
-            return _context.Jugador.Any(n => n.PlayerName == jugador);
-        } catch (Exception e) { 
-            _logger.Error(e,"Error al verificar el nombre");
-            return false;
+            return Result.Success<bool, DomainError>(
+                _context.Jugador.Any(n => n.PlayerName == jugador && !n.IsDeleted));
+        } catch (Exception e) {
+            _logger.Error(e, "Error al verificar el nombre");
+            return Result.Failure<bool, DomainError>(JugadorErrors.DataBaseError(e.Message));
         }
     }
 
