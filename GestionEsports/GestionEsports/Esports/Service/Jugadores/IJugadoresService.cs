@@ -12,9 +12,9 @@ public interface IJugadoresService {
     Result<Jugador, DomainError> Delete(int id, bool isLogic);
     bool DeleteAll();
     Result<Jugador, DomainError> Restore(int id);
-    Jugador? GetByPlayerName(string name);
-    IEnumerable<Jugador>? GetByRol(string rol);
-    IEnumerable<Jugador>? GetByTeam(string team);
-    bool ExisteJugador(string jugador);
+    Result<Jugador, DomainError> GetByPlayerName(string name);
+    Result<IEnumerable<Jugador>, DomainError> GetByRol(string rol);
+    Result<IEnumerable<Jugador>, DomainError> GetByTeam(string team);
+    Result<bool, DomainError> ExisteJugador(string jugador);
     (Jugador? jugador1, Jugador? jugador2) CompararJugadores(int id1, int id2);
 }

@@ -10,7 +10,7 @@ public interface ICrudRepository<TKey, Tvalue> {
 
     Result<Tvalue, DomainError> Create(Tvalue jugador);
     
-    Result<Tvalue?, DomainError> Update(TKey id, Tvalue jugador);
+    Result<Tvalue, DomainError> Update(TKey id, Tvalue jugador);
 
     Tvalue? Delete(TKey id, bool isLogic);
     
